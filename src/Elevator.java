@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 
 public class Elevator {
-    private static final int MAX_FLOOR = 55;
+    static final int MAX_FLOOR = 55;
     private Direction direction = Direction.UP;
     private int floor = 0;
     private LinkedList<Request> requests = new LinkedList<>();
@@ -28,14 +28,21 @@ public class Elevator {
     public void move() {
         if (this.floor > 0 && this.floor < MAX_FLOOR) {
             this.floor -= this.direction == Direction.UP ? -1 : 1;
+            // TODO in case of no other requests, no need to move in certain direction till floor/MAX_FLOOR, and switch
 
-//            for (Request item : this.requests) {
-//                if (item.direction == this.direction) {
-//
-//                }
-//            }
+            // removing all (in case of duplicates) requests that were in my direction and floor
+            this.requests.removeIf(item -> item.direction == this.direction && this.floor == item.getDestFloor());
         } else {
             switchDirection();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Elevator[" +
+                "direction: " + direction +
+                ", floor: " + floor +
+                ", requests: " + requests +
+                ']';
     }
 }

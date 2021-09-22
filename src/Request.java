@@ -3,6 +3,12 @@ public class Request {
     private int destFloor;
     Direction direction;
 
+    public Request(int srcFloor, int destFloor) {
+        this.srcFloor = srcFloor;
+        this.destFloor = destFloor;
+        this.direction = srcFloor - destFloor < 0 ? Direction.UP : Direction.DOWN;
+    }
+
     public Request(int srcFloor, int destFloor, Direction direction) {
         this.srcFloor = srcFloor;
         this.destFloor = destFloor;
@@ -36,9 +42,9 @@ public class Request {
     @Override
     public String toString() {
         return "Request[" +
-                "current floor:" + srcFloor +
-                ", destination floor:" + destFloor +
-                ", direction:" + direction +
+                "current floor: " + srcFloor +
+                ", destination floor: " + destFloor +
+                ", direction: " + direction +
                 ']';
     }
 }
