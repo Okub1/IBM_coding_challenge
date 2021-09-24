@@ -7,9 +7,11 @@ public class Elevator extends Thread {
     private Direction direction = Direction.UP;
     private int floor = 0;
     private Request request;
+    private final int id;
 
-    public Elevator(int sleepPerFloor) {
+    public Elevator(int sleepPerFloor, int id) {
         SLEEP_TIME = sleepPerFloor;
+        this.id = id;
     }
 
     @Override
@@ -100,7 +102,7 @@ public class Elevator extends Thread {
 
     @Override
     public String toString() {
-        return "Elevator[" +
+        return "Elevator " + id + " [" +
                 "direction: " + direction +
                 ", floor: " + floor +
                 ", request: " + request +

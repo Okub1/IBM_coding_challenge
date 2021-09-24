@@ -30,9 +30,9 @@ public class Request {
     @Override
     public String toString() {
         return "Request[" +
-                "current floor: " + srcFloor +
-                ", destination floor: " + destFloor +
-                ", direction: " + direction +
-                ']';
+                srcFloor +
+                " -> " + destFloor +
+                ", (" + direction +
+                ")]";
     }
 }
