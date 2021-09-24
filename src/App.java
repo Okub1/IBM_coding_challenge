@@ -1,7 +1,13 @@
+import java.util.Random;
+
 public class App {
     public static void main(String[] args) {
         ElevatorHandler elevatorHandler = new ElevatorHandler();
 
-        elevatorHandler.addRequest(new Request(0, 25));
+        Random random = new Random(1);
+
+        for (;;) {
+            elevatorHandler.addRequest(new Request(random.nextInt(55), random.nextInt(55)));
+        }
     }
 }

@@ -1,7 +1,7 @@
 public class Request {
     private int srcFloor;
     private int destFloor;
-    Direction direction;
+    private Direction direction;
 
     public Request(int srcFloor, int destFloor) {
         this.srcFloor = srcFloor;
@@ -19,24 +19,12 @@ public class Request {
         return srcFloor;
     }
 
-    public void setSrcFloor(int srcFloor) {
-        this.srcFloor = srcFloor;
-    }
-
     public int getDestFloor() {
         return destFloor;
     }
 
-    public void setDestFloor(int destFloor) {
-        this.destFloor = destFloor;
-    }
-
     public Direction getDirection() {
         return direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 
     @Override
