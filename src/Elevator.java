@@ -36,15 +36,6 @@ public class Elevator extends Thread {
         }
     }
 
-    public Direction getDirection() {
-        return this.direction;
-    }
-
-
-    public int getFloor() {
-        return floor;
-    }
-
     public void addRequest(Request request) {
         this.request = request;
         this.direction = request.getDirection();
@@ -93,11 +84,6 @@ public class Elevator extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    // check for dest, depends on elevator direction
-    public int getMaxFloor() {
-        return request.getDestFloor();
     }
 
     @Override
