@@ -1,5 +1,6 @@
-import java.util.LinkedList;
-import java.util.Queue;
+package App;
+
+import UI.DrawCanvas;
 
 public class Elevator extends Thread {
     static final int MAX_FLOOR = 55;
@@ -9,9 +10,17 @@ public class Elevator extends Thread {
     private Request request;
     private final int id;
 
+    private DrawCanvas drawCanvas;
+
     public Elevator(int sleepPerFloor, int id) {
         SLEEP_TIME = sleepPerFloor;
         this.id = id;
+    }
+
+    public Elevator(DrawCanvas drawCanvas) {
+        SLEEP_TIME = 250;
+        this.id = 0;
+        this.drawCanvas = drawCanvas;
     }
 
     @Override
@@ -25,7 +34,7 @@ public class Elevator extends Thread {
         while (true) { // warning, no exit condition!!
             while (isAvailable()) {
                 sleep();
-                System.out.println(this);
+//                System.out.println(this);
             }
 
             if (this.floor != request.getSrcFloor()) {
@@ -34,6 +43,25 @@ public class Elevator extends Thread {
 
             move();
         }
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    // FOR TESTING ONLY!!
+    public void reset() {
+        this.request = null;
+        this.floor = 0;
+        this.direction = Direction.UP;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void addCanvas(DrawCanvas drawCanvas) {
+        this.drawCanvas = drawCanvas;
     }
 
     public void addRequest(Request request) {
@@ -53,14 +81,20 @@ public class Elevator extends Thread {
     // moves depending on direction, till reaches destination
     public void move() {
 
-        while (this.floor != this.request.getDestFloor()) {
-            sleep();
+        try {
+            while (this.floor != this.request.getDestFloor()) {
+                sleep();
 
-            this.floor -= this.direction == Direction.UP ? -1 : 1;
-            System.out.println(this);
+                this.floor -= this.direction == Direction.UP ? -1 : 1;
+//                System.out.println(this);
+                drawCanvas.repaint();
+            }
+
+            removeRequest();
+        } catch (Exception e) {
+            System.out.println("ERROR");
+            e.printStackTrace();
         }
-
-        removeRequest();
     }
 
     // move elevator to floor
@@ -72,7 +106,8 @@ public class Elevator extends Thread {
         while (Math.abs(floor - this.floor) != 0) {
             sleep();
             this.floor -= this.direction == Direction.UP ? -1 : 1;
-            System.out.println(this);
+//            System.out.println(this);
+            drawCanvas.repaint();
         }
 
         this.direction = oldDir;
@@ -88,7 +123,7 @@ public class Elevator extends Thread {
 
     @Override
     public String toString() {
-        return "Elevator " + id + " [" +
+        return "App.Elevator " + id + " [" +
                 "direction: " + direction +
                 ", floor: " + floor +
                 ", request: " + request +
