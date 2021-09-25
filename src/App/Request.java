@@ -1,9 +1,9 @@
 package App;
 
 public class Request {
-    private int srcFloor;
-    private int destFloor;
-    private Direction direction;
+    private final int srcFloor;
+    private final int destFloor;
+    private final Direction direction;
 
     public Request(int srcFloor, int destFloor) {
         this.srcFloor = srcFloor;

@@ -3,23 +3,18 @@ package App;
 import UI.DrawCanvas;
 
 public class Elevator extends Thread {
-    static final int MAX_FLOOR = 55;
-    private static int SLEEP_TIME;
+    static final int MAX_FLOOR = Utility.MAX_FLOOR;
+
     private Direction direction = Direction.UP;
     private int floor = 0;
     private Request request;
-    private final int id;
 
     private DrawCanvas drawCanvas;
 
-    public Elevator(int sleepPerFloor, int id) {
-        SLEEP_TIME = sleepPerFloor;
-        this.id = id;
+    public Elevator() {
     }
 
     public Elevator(DrawCanvas drawCanvas) {
-        SLEEP_TIME = 250;
-        this.id = 0;
         this.drawCanvas = drawCanvas;
     }
 
@@ -49,11 +44,8 @@ public class Elevator extends Thread {
         return floor;
     }
 
-    // FOR TESTING ONLY!!
-    public void reset() {
-        this.request = null;
-        this.floor = 0;
-        this.direction = Direction.UP;
+    public Request getRequest() {
+        return request;
     }
 
     public Direction getDirection() {
@@ -90,6 +82,8 @@ public class Elevator extends Thread {
                 drawCanvas.repaint();
             }
 
+            sleep(Utility.WAIT_TIME_ON_FLOOR);
+
             removeRequest();
         } catch (Exception e) {
             System.out.println("ERROR");
@@ -114,8 +108,12 @@ public class Elevator extends Thread {
     }
 
     private void sleep() {
+        sleep(Utility.TRAVEL_TIME_PER_FLOOR);
+    }
+
+    private void sleep(int milis) {
         try {
-            Thread.sleep(SLEEP_TIME);
+            Thread.sleep(milis);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -123,7 +121,7 @@ public class Elevator extends Thread {
 
     @Override
     public String toString() {
-        return "App.Elevator " + id + " [" +
+        return "App.Elevator [" +
                 "direction: " + direction +
                 ", floor: " + floor +
                 ", request: " + request +
