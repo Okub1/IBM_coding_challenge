@@ -10,9 +10,8 @@ public class ElevatorHandler {
     private static final int NUMBER_OF_ELEVATORS = 7;
     static final int MILISECONDS_PER_FLOOR = 250; // used due to threads
     private final Elevator[] elevators = new Elevator[NUMBER_OF_ELEVATORS];
-    private Queue<Request> queue = new LinkedList<>();
-
-    private DefaultTableModel defaultTableModel;
+    private final Queue<Request> queue = new LinkedList<>();
+    private final DefaultTableModel defaultTableModel;
 
     public ElevatorHandler(DrawCanvas drawCanvas, DefaultTableModel defaultTableModel) {
         this.defaultTableModel = defaultTableModel;
@@ -24,10 +23,6 @@ public class ElevatorHandler {
         }
 
         drawCanvas.setElevators(elevators);
-    }
-
-    public Elevator[] getElevators() {
-        return elevators;
     }
 
     public void addRequest(Request request) {

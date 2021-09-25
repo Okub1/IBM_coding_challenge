@@ -18,12 +18,11 @@ public class GUI extends JFrame {
     private JPanel mainPanel;
     private JButton button1;
 
-    private Elevator[] elevators = new Elevator[1];
+    private final Elevator[] elevators = new Elevator[1];
     private ElevatorHandler elevatorHandler;
 
-    private DefaultTableModel dm;
-
     public GUI() {
+        super("Elevators demo - IBM coding challenge");
         setContentPane(mainPanel);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +57,7 @@ public class GUI extends JFrame {
         requests = new JTable();
         requests.getTableHeader().setReorderingAllowed(false);
 
-        dm = new DefaultTableModel(0, 0);
+        DefaultTableModel dm = new DefaultTableModel(0, 0);
         dm.setColumnIdentifiers(header);
         requests.setModel(dm);
 
@@ -66,5 +65,8 @@ public class GUI extends JFrame {
         panelElevators.setPreferredSize(new Dimension(640, 480));
 
         elevatorHandler = new ElevatorHandler((DrawCanvas) panelElevators, dm);
+
+        // TODO elevator handler blocks GUI from working, therefore I need it to run GUI on separate thread (?)
+//        elevatorHandler.start();
     }
 }

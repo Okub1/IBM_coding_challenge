@@ -1,9 +1,8 @@
 import UI.GUI;
-import UI.GUIWrapper;
 
 public class App {
     public static void main(String[] args) {
-        GUIWrapper gui = new GUIWrapper();
+        GUI gui = new GUI();
 
 //        App.ElevatorHandler elevatorHandler = new App.ElevatorHandler();
 //
