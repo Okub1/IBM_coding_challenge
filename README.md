@@ -6,3 +6,5 @@ to run project, add project to IntelliJ via file -> new project -> from existing
 or
 <br>
 pull this repo to intelliJ
+
+and then start main in App class...
